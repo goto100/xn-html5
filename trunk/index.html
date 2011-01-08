@@ -3,6 +3,7 @@
 <head>
 	<meta charset="UTF-8" />
 	<link rel="stylesheet" href="css/note.css" />
+	<script type="text/javascript" src="paint.js"></script>
 	<title>我的日记本</title>
 </head>
 <body>
@@ -17,7 +18,23 @@
 				<button>文字</button>
 				<button>画笔</button>
 				<button>粗细</button>
+				<input id="penWidth" type="range" value="1" min="1" max="20" /><span id="penWidthOutput"></span>
+
 				<button>颜色</button>
+				<ul class="colors">
+					<li style="color:red">C</li>	
+					<li style="color:blue">C</li>	
+					<li style="color:green">C</li>	
+					<li style="color:lime">C</li>	
+					<li style="color:orchid">C</li>	
+					<li style="color:purple">C</li>	
+					<li style="color:pink">C</li>	
+					<li style="color:silve">C</li>	
+					<li style="color:yellow">C</li>	
+					<li style="color:burlywood">C</li>	
+					<li style="color:chocolate">C</li>	
+					<li style="color:black">C</li>	
+				</ul>
 			</section>
 		</aside>
 		
@@ -32,6 +49,11 @@
 				<canvas id="noteContent" width="648" height="500"></canvas>
 			</section>
 		</article>
+
+				<ul class="pics">
+					<li><img src="http://xnimg.cn/imgpro/icons/blog.gif" /></li>
+					<li><img src="http://hdn.xnimg.cn/photos/hdn421/20101113/1335/h_tiny_UNoy_5e48000038232f74.jpg" /></li>
+				</ul>
 		
 	</div>
 </body>

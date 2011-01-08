@@ -30,10 +30,10 @@ Paint.prototype = {
 			paint.iLastY = -1;
 		});
 
-		this.canvas.addEventListener('mousemove', function(evnt) {
+		this.canvas.addEventListener('mousemove', function(event) {
 			if (paint.isMouseDown) {
-				var iX = evnt.clientX - paint.canvas.offsetLeft + (window.pageXOffset || document.body.scrollLeft || document.documentElement.scrollLeft);
-				var iY = evnt.clientY - paint.canvas.offsetTop + (window.pageYOffset || document.body.scrollTop || document.documentElement.scrollTop);
+				var iX = event.clientX - paint.canvas.offsetLeft + (window.pageXOffset || document.body.scrollLeft || document.documentElement.scrollLeft);
+				var iY = event.clientY - paint.canvas.offsetTop + (window.pageYOffset || document.body.scrollTop || document.documentElement.scrollTop);
 				paint.context.beginPath();
 				paint.context.moveTo(paint.iLastX, paint.iLastY);
 				paint.context.lineTo(iX, iY);
@@ -56,12 +56,14 @@ Paint.prototype = {
 
 		var paint = this;
 
-		this.canvas.addEventListener('drop', function(evnt) {
-			var iX = evnt.clientX - paint.canvas.offsetLeft + (window.pageXOffset || document.body.scrollLeft || document.documentElement.scrollLeft);
-			var iY = evnt.clientY - paint.canvas.offsetTop + (window.pageYOffset || document.body.scrollTop || document.documentElement.scrollTop);
+		this.canvas.addEventListener('drop', function(event) {
 			var image = paint.draggingImage;
 			var offset = [image.width / 2, image.height / 2];
-			paint.context.drawImage(image, iX - offset[0], iY - offset[1]);
+			console.log(event)
+			console.dir(image)
+			var x = event.offsetX - offset[0];
+			var y = event.offsetY - offset[1];
+			paint.context.drawImage(image, x, y);
 			paint.draggingImage = null;
 		});
 
@@ -77,6 +79,9 @@ Paint.prototype = {
 };
 
 window.addEventListener('DOMContentLoaded', function() {
+
+	// 支持输入文字
+	supportText();
 
 	var paint = new Paint(document.getElementById('noteContent'));
 	paint.initCanvas();
@@ -130,4 +135,82 @@ window.addEventListener('DOMContentLoaded', function() {
 
 
 
+var textFillStyle = "#ff0000";
+var textFontSize = "15"
+var textFontFamily = "sans-serif";
+
+function supportText() {
+    var show_offset = 10;
+
+    var cv = document.getElementById("noteContent");
+    var tw = document.getElementById("textarea_wapper");
+    var btn_pt = document.getElementById("print_text");
+    var btn_ct = document.getElementById("cancel_text");
+    var text_area = document.getElementById("text_area");
+    cv.addEventListener('dblclick', begin_input_textarea , false);
+    btn_ct.addEventListener('click', cancel_text_to_canvas, false);
+    btn_pt.addEventListener('click', print_text_to_canvas, false);
+
+    function get_position_canvas() {
+      var iX = window.event.clientX - cv.offsetLeft + (window.pageXOffset || document.body.scrollLeft || document.documentElement.scrollLeft);
+      var iY = window.event.clientY - cv.offsetTop + (window.pageYOffset || document.body.scrollTop || document.documentElement.scrollTop);
+      return {x: iX, y: iY};
+    }    
+
+    function get_position() {
+      var ev = window.event;
+
+      if(ev.pageX || ev.pageY){
+        return {x:ev.pageX, y:ev.pageY};
+      }
+
+      return { x:ev.clientX + document.body.scrollLeft - document.body.clientLeft,
+        y:ev.clientY + document.body.scrollTop - document.body.clientTop };
+    }
+
+    var print_text_position; 
+
+    function begin_input_textarea(ev) {
+      // get pointY
+      var t = get_position_canvas();
+      var w = get_position();
+      console.log(t.x);
+      console.log(t.y);
+      console.log(w.x);
+      console.log(w.y);
+      // show textarea
+
+      print_text_position = t;
+
+      tw.style.display = "block"
+      tw.style.top = (w.y + show_offset)+ "px";
+      tw.style.left = (w.x + show_offset) + "px";
+
+      text_area.focus();
+      
+    }
+
+    function print_text_to_canvas() {
+      console.log(text_area.value);
+      var content = text_area.value.split('\n');
+      console.log(content.length);
+
+      var i = 0;
+      var ctx = cv.getContext("2d");
+      ctx.fillStyle = textFillStyle;
+      ctx.font = textFontSize + "px " + textFontFamily;
+
+      for (i = 0; i < content.length; i++) {
+        ctx.fillText(content[i], print_text_position.x, print_text_position.y + (i * 15));
+      }
+
+      cancel_text_to_canvas();
+    }
+
+    function cancel_text_to_canvas() {
+      tw.style.display = "none";
+      text_area.value = "";
+    }
+
+}
 

@@ -59,10 +59,12 @@ window.notes = {};
 		//function _onError(tx, e){
 		//	update(date, content);
 		//}
-		content = content.toDataURL("image/png", "");
+		console.log(content);
+		window.C = content;
+		data = content.toDataURL("image/png", "");
 		db.transaction(function(tx){
 			tx.executeSql('INSERT INTO '+ tName +'(date, content) VALUES (?,?)', 
-							[date, content],
+							[date, data],
 						_t.onSet.bind(_t),
 						_t.onError.bind(_t));
 						//_onError);

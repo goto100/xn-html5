@@ -80,8 +80,25 @@ Paint.prototype = {
 
 window.addEventListener('DOMContentLoaded', function() {
 
+	window.textFillStyle = "#000000";
+	window.textFontSize = "15"
+	window.textFontFamily = "sans-serif";
+
 	// 支持输入文字
 	supportText();
+
+	// 文字字体
+	var fontFamilyEle = document.getElementById('fontFamily');
+	fontFamilyEle.onchange = function() {
+		window.textFontFamily = this.value;
+	};
+
+	// 文字大小
+	var fontSizeEle = document.getElementById('fontSize');
+	fontSizeEle.onchange = function() {
+		window.textFontSize = this.value;
+	};
+	
 
 	var paint = new Paint(document.getElementById('noteContent'));
 	paint.initCanvas();
@@ -91,6 +108,10 @@ window.addEventListener('DOMContentLoaded', function() {
 	for (var i = 0; i < colors.length; i++) {
 		colors[i].addEventListener('click', function() {
 			paint.changeDrawColor(this.style.color);
+
+			// 文字
+			window.textFillStyle = this.style.color;
+
 			cOut.innerHTML = cOut.style.color = this.innerHTML;
 		}, false);
 	}
@@ -163,10 +184,6 @@ window.addEventListener('DOMContentLoaded', function() {
 
 
 
-var textFillStyle = "#ff0000";
-var textFontSize = "15"
-var textFontFamily = "sans-serif";
-
 function supportText() {
     var show_offset = 10;
 
@@ -226,7 +243,7 @@ function supportText() {
       var i = 0;
       var ctx = cv.getContext("2d");
       ctx.fillStyle = textFillStyle;
-      ctx.font = fontFontSize + "px " + textFontFamily;
+      ctx.font = textFontSize + "px " + textFontFamily;
 
       for (i = 0; i < content.length; i++) {
         ctx.fillText(content[i], print_text_position.x, print_text_position.y + (i * 15));

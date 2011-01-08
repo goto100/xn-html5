@@ -121,6 +121,28 @@ window.addEventListener('DOMContentLoaded', function() {
 	// 初始化放置图片
 	paint.initForDraggingImage();
 
+	// init note db
+	notes.init();
+
+	var noteDate = document.getElementById('noteDate');
+	noteDate.previousValue = noteDate.value;
+
+	noteDate.addEventListener('click', function(event) {
+		if (this.previousValue == this.value) return;
+		notes.getNote(this.value, function(note) {
+			
+		});
+		this.previousValue = this.value;
+	});
+
+
+	var submit = document.getElementById('submit');
+	submit.addEventListener('click', function(event) {
+		notes.setNote(noteDate.value, paint.canvas, function(value) {
+			alert(value)
+		});
+	});
+
 }, false);
 
 
@@ -204,7 +226,7 @@ function supportText() {
       var i = 0;
       var ctx = cv.getContext("2d");
       ctx.fillStyle = textFillStyle;
-      ctx.font = textFontSize + "px " + textFontFamily;
+      ctx.font = fontFontSize + "px " + textFontFamily;
 
       for (i = 0; i < content.length; i++) {
         ctx.fillText(content[i], print_text_position.x, print_text_position.y + (i * 15));

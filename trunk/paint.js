@@ -82,9 +82,11 @@ window.addEventListener('DOMContentLoaded', function() {
 	paint.initCanvas();
 
 	var colors = document.querySelectorAll('.colors li');
+	var cOut = document.getElementById('colorOutput');
 	for (var i = 0; i < colors.length; i++) {
 		colors[i].addEventListener('click', function() {
 			paint.changeDrawColor(this.style.color);
+			cOut.innerHTML = cOut.style.color = this.innerHTML;
 		}, false);
 	}
 

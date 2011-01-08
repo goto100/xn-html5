@@ -1,4 +1,4 @@
-﻿<!DOCTYPE HTML>
+<!DOCTYPE HTML>
 <html>
 <head>
 	<meta charset="UTF-8" />
@@ -15,25 +15,25 @@
 		<aside class="tools">
 			<h3>工具</h3>
 			<section id="tools">
-				<button>文字</button>
-				<button>画笔</button>
-				<button>粗细</button>
-				<input id="penWidth" type="range" value="1" min="1" max="20" /><span id="penWidthOutput"></span>
+				<button id="inputText">文字</button>
+				<button id="drawImage">画笔</button>
+				<label for="penWidth">粗细：<span id="penWidthOutput"></span></label>
+				<input id="penWidth" type="range" value="1" min="1" max="20" />
 
-				<button>颜色</button>
-				<ul class="colors">
-					<li style="color:red">C</li>	
-					<li style="color:blue">C</li>	
-					<li style="color:green">C</li>	
-					<li style="color:lime">C</li>	
-					<li style="color:orchid">C</li>	
-					<li style="color:purple">C</li>	
-					<li style="color:pink">C</li>	
-					<li style="color:silve">C</li>	
-					<li style="color:yellow">C</li>	
-					<li style="color:burlywood">C</li>	
-					<li style="color:chocolate">C</li>	
-					<li style="color:black">C</li>	
+				<label for="">颜色：<span id="colorOutput"></span></label>
+				<ul class="colors" id="colors">
+					<li style="color:red;background-color:red;">red</li>	
+					<li style="color:blue;background-color:blue;">blue</li>	
+					<li style="color:green;background-color:green;">green</li>	
+					<li style="color:lime;background-color:lime;">lime</li>	
+					<li style="color:orchid;background-color:orchid;">orchid</li>	
+					<li style="color:purple;background-color:purple;">purple</li>	
+					<li style="color:pink;background-color:pink;">pink</li>	
+					<li style="color:silver;background-color:silver;">silver</li>	
+					<li style="color:yellow;background-color:yellow;">yellow</li>	
+					<li style="color:burlywood;background-color:burlywood;">burlywood</li>	
+					<li style="color:chocolate;background-color:chocolate;">chocolate</li>	
+					<li style="color:black;background-color:black;">black</li>	
 				</ul>
 			</section>
 		</aside>
@@ -46,15 +46,18 @@
 				<span class="weather" id="noteWeather" title="点击选择天气">晴</span>
 			</h3>
 			<section class="content" id="canvasBox">
-				<canvas id="noteContent" width="648" height="500"></canvas>
+				<canvas id="noteContent" width="678" height="500"></canvas>
 			</section>
 		</article>
 
-				<ul class="pics">
-					<li><img src="http://xnimg.cn/imgpro/icons/blog.gif" /></li>
-					<li><img src="http://hdn.xnimg.cn/photos/hdn421/20101113/1335/h_tiny_UNoy_5e48000038232f74.jpg" /></li>
-				</ul>
+		<ul class="pics">
+			<li><img src="http://xnimg.cn/imgpro/icons/blog.gif" /></li>
+			<li><img src="http://hdn.xnimg.cn/photos/hdn421/20101113/1335/h_tiny_UNoy_5e48000038232f74.jpg" /></li>
+		</ul>
 		
 	</div>
+	
+	<script type="text/javascript" src="js/cy.js"></script>
+	
 </body>
 </html>

@@ -42,6 +42,10 @@ header {
 	margin: 0 auto;
 	overflow: hidden;
 }
+.shadow {
+	border: 1px solid #CCC;
+	box-shadow: 2px 2px 1px #DDD;
+}
 .tools {
 	float: left;
 	width: 80px;
@@ -59,6 +63,7 @@ header {
 	font-size: 16px;
 	text-align: center;
 	overflow: hidden;
+	margin-bottom: 5px;
 }
 .date-weather button {
 	display: inline-block;
@@ -68,6 +73,11 @@ header {
 	padding: 0;
 	background: transparent;
 	text-indent: -9999em;
+}
+.date-weather input[type='date'] {
+	font-size: 14px;
+	font-weight: bold;
+	float: left;
 }
 .date-weather button.older {
 	border-top: 7px solid transparent;
@@ -82,4 +92,7 @@ header {
 	border-bottom: 7px solid transparent;
 	border-right: 0 none;
 	margin-left: 10px;
+}
+.date-weather .weather {
+	float: right;
 }

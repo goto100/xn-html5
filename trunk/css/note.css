@@ -39,8 +39,6 @@ header {
 }
 #canvasBox {
 	border: 1px solid #ccc;
-}
-#noteContent {
 	position: relative;
 }
 #container {
@@ -137,6 +135,7 @@ header {
 }
 .pics img {
 	border: 1px solid transparent;
+	-webkit-transition: all 1s ease-in-out;
 }
 .pics img:hover {
 	border: 1px solid #CCC;

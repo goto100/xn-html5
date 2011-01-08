@@ -18,7 +18,14 @@
 			<section id="tools">
 				<button id="inputText">文字</button>
 				<button id="drawImage">画笔</button>
-				<label for="">文字大小：</label>
+				<label for="fontFamily">字体：</label>
+				<select name="fontFamily" id="fontFamily" style="margin-bottom: 5px;">
+					<option value="宋体">宋体</option>
+					<option value="黑体">黑体</option>
+					<option value="幼圆">幼圆</option>
+				</select>
+				<label for="fontSize">文字大小：<span id="fontSizeOutput"></span></label>
+				<input type="range" id="fontSize" value="12" min="12" max="30" />
 				<label for="penWidth">粗细：<span id="penWidthOutput"></span></label>
 				<input id="penWidth" type="range" value="1" min="1" max="20" />
 
@@ -45,7 +52,11 @@
 				<!-- <button class="older" title="前一天">前一天</button> -->
 				<input type="date" id="noteDate" value="2011-01-08" title="输入日期，或者点击右侧的箭头选择日期" />
 				<!-- <button class="newer" title="后一天">后一天</button> -->
-				<span class="weather" id="noteWeather" title="点击选择天气">晴</span>
+				<select class="weather" id="noteWeather">
+					<option value="晴" selected="selected">晴</option>
+					<option value="阴">阴</option>
+					<option value="多云">多云</option>
+				</select>
 			</h3>
 			<section class="content" id="canvasBox">
 				<canvas id="noteContent" width="678" height="500"></canvas>

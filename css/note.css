@@ -39,7 +39,6 @@ header {
 }
 #canvasBox {
 	border: 1px solid #ccc;
-	position: relative;
 }
 #container {
 	width: 860px;

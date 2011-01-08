@@ -101,6 +101,12 @@ window.addEventListener('DOMContentLoaded', function() {
 		penWidthOutput.innerHTML = this.value;
 		paint.changeDrawWidth(this.value);
 	}, false);
+	
+	var fontSize = document.getElementById('fontSize');
+	var fontSizeOutput = document.getElementById('fontSizeOutput');
+	fontSize.addEventListener('change',function(){
+		fontSizeOutput.innerHTML = this.value;
+	});
 
 	// 初始化画线
 	paint.initForDrawingLine();

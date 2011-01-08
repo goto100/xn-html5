@@ -1,0 +1,89 @@
+===Storage===
+
+Cookies			size
+Flash Storage	plugin
+IE UserData		compatible
+Google Gears	plugin
+Dojo Storage	
+
+WebStorage
+	localStorage
+	sessionstorage
+
+Web SQL Database
+IndexedDB (aka. WebSimpleDB) -- from Oracle
+
+有点：
+	结构化的数据
+	有效减少http请求
+	processing on client 减少server压力
+
+localStorage && sessionStorage 都是 key value
+
+localStorage：
+	key - value 都是string
+	永久的存储
+	避免在http请求中夹带过多的cookie
+	localStorage 适合 存储用户个性化配置信息
+
+sessionStorage 与 localStorage的不同：
+	不是永久，关闭浏览器丢失
+	不适合存储配置，适合存储敏感信息，避免隐私泄漏
+
+
+
+
+
+
+=== WebSQLDatabase ===
+
+sql字符串传给 executeSQL() -- ugly!
+W3C 停止维护此标准，因为都是基于 SQLLite 的，然而SQLLite并不是标准
+
+
+
+
+
+=== IndexDB === 
+
+以前叫 WebSimpleDatabase
+
+index database --- 带索引的数据库
+也是key-value，但是value可以是对象
+支持异步、同步操作调用
+
+人生是一场修行 W3C\Mozilla\Google 等等例子都不能运行……
+
+Why：
+	浏览器厂商有定制技术 不同前缀（webkit_ moz_)
+	api 不同，参数
+	removeObejectStore(std) / deleteObjectStore(unstd)
+
+
+
+
+数据存储到哪里了？
+	存储在浏览器的用户数据目录下（user data dic）,相互间独立
+
+不同浏览器数据互通么？
+	不互通
+
+卸载浏览器数据数据在不在？
+	不删除用户目录就在
+
+安全隐患？
+	有，但不必cookies大
+
+
+
+
+
+
+
+
+
+
+
+
+
+

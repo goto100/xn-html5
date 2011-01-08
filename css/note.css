@@ -8,6 +8,7 @@ body {
 	font-family: Tahoma,'微软雅黑',simsun;
 	font-size: 12px;
 	line-height: 1.5;
+	color: #333;
 }
 textarea {
 	font-family: Tahoma,'微软雅黑',simsun;
@@ -30,7 +31,7 @@ header {
 	font-weight: bold;
 	height: 40px;
 	line-height: 40px;
-	background: #000;
+	background: #005EAC;
 	color: #fff;
 }
 #container {

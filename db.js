@@ -62,8 +62,10 @@ window.notes = {};
 		console.log(content);
 		window.C = content;
 		data = content.toDataURL("image/png", "");
+		//console.log(data);
+		//data = encodeURIComponent(data);
 		db.transaction(function(tx){
-			tx.executeSql('INSERT INTO '+ tName +'(date, content) VALUES (?,?)', 
+			tx.executeSql('INSERT INTO '+ tName +'(date, content) VALUES (?,?)',
 							[date, data],
 						_t.onSet.bind(_t),
 						_t.onError.bind(_t));

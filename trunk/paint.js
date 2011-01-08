@@ -150,8 +150,12 @@ window.addEventListener('DOMContentLoaded', function() {
 
 	noteDate.addEventListener('click', function(event) {
 		if (this.previousValue == this.value) return;
-		notes.getNote(this.value, function(note) {
-			
+		notes.getNote(new Date(this.value).getTime(), function(note) {
+			if (note) {
+				paint.context.drawImage(note, 0, 0);
+			} else {
+				paint.initCanvas();
+			}
 		});
 		this.previousValue = this.value;
 	});
@@ -159,8 +163,8 @@ window.addEventListener('DOMContentLoaded', function() {
 
 	var submit = document.getElementById('submit');
 	submit.addEventListener('click', function(event) {
-		notes.setNote(noteDate.value, paint.canvas, function(value) {
-			alert(value)
+		notes.setNote(new Date(noteDate.value).getTime(), paint.canvas, function(value) {
+			if (!value) alert('已经写过了')
 		});
 	});
 

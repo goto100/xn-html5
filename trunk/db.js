@@ -87,7 +87,13 @@ window.notes = {};
 					);
 		});
 	}
-	
+		notes.clear = function(){
+		db.transaction(function(tx){
+			var sql = 'delete from notes where 1';
+			tx.executeSql(sql);
+				//_onError);
+		});
+	}
 	
 	var _t = {};
 	_t.onError = function(tx, e) {

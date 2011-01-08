@@ -1,0 +1,111 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+  <p>Hello Html V</p>
+  <hr />
+  <div id="canvas_wapper">
+    <canvas id="note_canvas" style="border: 1px solid;" width="500px" height="300px"></canvas>
+  </div>
+  <hr />
+  <div id="textarea_wapper" style="position: absolute; width: 313px; height: 120px; background-color: gray; display: none;">
+    <textarea rows="5" cols="36" id="text_area" ></textarea>
+      <button id="print_text" style="float: right">Print</button>
+      <button id="cancel_text" style="float: right">Cancel</button>
+  </div>
+  <script type="text/javascript">
+
+    var show_offset = 10;
+
+    var cv = document.getElementById("note_canvas");
+    var tw = document.getElementById("textarea_wapper");
+    var btn_pt = document.getElementById("print_text");
+    var btn_ct = document.getElementById("cancel_text");
+    var text_area = document.getElementById("text_area");
+    cv.addEventListener('dblclick', begin_input_textarea , false);
+    btn_ct.addEventListener('click', cancel_text_to_canvas, false);
+    btn_pt.addEventListener('click', print_text_to_canvas, false);
+
+    function get_position_canvas() {
+      var iX = window.event.clientX - cv.offsetLeft + (window.pageXOffset || document.body.scrollLeft || document.documentElement.scrollLeft);
+      var iY = window.event.clientY - cv.offsetTop + (window.pageYOffset || document.body.scrollTop || document.documentElement.scrollTop);
+      return {x: iX, y: iY};
+    }    
+
+    function get_position() {
+      var ev = window.event;
+
+      if(ev.pageX || ev.pageY){
+        return {x:ev.pageX, y:ev.pageY};
+      }
+
+      return { x:ev.clientX + document.body.scrollLeft - document.body.clientLeft,
+        y:ev.clientY + document.body.scrollTop - document.body.clientTop };
+    }
+
+    var print_text_position; 
+
+    function begin_input_textarea(ev) {
+      // get pointY
+      var t = get_position_canvas();
+      var w = get_position();
+      console.log(t.x);
+      console.log(t.y);
+      console.log(w.x);
+      console.log(w.y);
+      // show textarea
+
+      print_text_position = t;
+
+      tw.style.display = "block"
+      tw.style.top = (w.y + show_offset)+ "px";
+      tw.style.left = (w.x + show_offset) + "px";
+
+      text_area.focus();
+      
+    }
+
+    function print_text_to_canvas() {
+      console.log(text_area.value);
+      var content = text_area.value.split('\n');
+      console.log(content.length);
+
+      var i = 0;
+      var ctx = cv.getContext("2d");
+      ctx.fillStyle = "#ff0000";
+      ctx.font = "15px sans-serif";
+
+      for (i = 0; i < content.length; i++) {
+        ctx.fillText(content[i], print_text_position.x, print_text_position.y + (i * 15));
+      }
+
+      cancel_text_to_canvas();
+    }
+
+    function cancel_text_to_canvas() {
+      tw.style.display = "none";
+      text_area.value = "";
+    }
+    /*
+    var ctx = cv.getContext("2d");
+ +       ctx.font
+
+    }
+
+
+    /*
+    var ctx = cv.getContext("2d");
+    ctx.fillStyle = "#FF0000";
+    ctx.fillRect(0,0,80,100);
+    ctx.fillStyle = '#00f';
+    ctx.font = 'italic 30px sans-serif';
+    ctx.textBaseline = 'top';
+    ctx.fillText('Hello world!', 0, 0);
+    ctx.font = 'bold 30px sans-serif';
+    ctx.strokeText('Hello world!', 0, 50); */
+  </script>
+</body>
+</html>
